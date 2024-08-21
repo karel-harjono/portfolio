@@ -30,4 +30,20 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  /* Styles the scrollbar itself */
+  ::-webkit-scrollbar {
+    width: 12px; /* width of the entire scrollbar */
+  }
+
+  /* Styles the draggable part of the scrollbar */
+  ::-webkit-scrollbar-thumb {
+    background-color: #6b7280; /* color of the scroll thumb */
+    border-radius: 6px; /* roundness of the scroll thumb */
+    border: 3px solid transparent; /* creates padding around scroll thumb */
+  }
+
+  /* Styles the part of the scrollbar track where the thumb isn't */
+  ::-webkit-scrollbar-track {
+    background: #2d2d2d; /* color of the track */
+  }
 }

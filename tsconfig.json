@@ -1,4 +1,17 @@
 {
+  "theme": {
+    "fontFamily": {
+      "sans": ["Aktiv Grotesk", "sans-serif"],
+      "serif": ["Georgia", "serif"],
+      "mono": ["Menlo", "monospace"]
+    },
+    "colors": {
+      "primary": "#0070f3",
+      "secondary": "#ff0080",
+      "accent": "#00ffaa",
+      "highlight": "#a7f3d0"
+    }
+  },
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
