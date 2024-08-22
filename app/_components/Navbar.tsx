@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-60 p-2 bg-transparent text-primary rounded-3xl text-sm">
+    <div className="hidden lg:block w-60 p-2 bg-transparent text-primary rounded-3xl text-sm">
       <div className={`${qwitcherGryphen.className} p-4 mb-1 text-4xl`}>
         Karel Harjono
       </div>
