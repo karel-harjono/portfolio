@@ -37,7 +37,7 @@ const Navbar = () => {
             <HomeIcon className="h-5 w-5 mr-2" />
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="/work" className={getLinkClass("/work")}>
             Work
             <BriefcaseIcon className="h-5 w-5 mr-2" />
@@ -48,7 +48,7 @@ const Navbar = () => {
             About
             <UserIcon className="h-5 w-5 mr-2" />
           </Link>
-        </li>
+        </li> */}
         <li className="flex items-center justify-between p-4 rounded-lg">
           <div className="flex items-center">Network</div>
           <div className="flex items-center">
@@ -64,6 +64,9 @@ const Navbar = () => {
           </div>
         </li>
       </ul>
+      <footer className="text-center text-xs text-secondary mt-2">
+        © 2024 Karel Harjono
+      </footer>
     </div>
   );
 };
