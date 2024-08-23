@@ -4,7 +4,7 @@ import { SparklesIcon } from "@heroicons/react/24/solid";
 
 export default function Home() {
   return (
-    <div className="max-w-screen-lg">
+    <div className="">
       <div className="flex flex-col w-full mb-24 lg:mb-12">
         <h1 className="text-6xl mb-1">Hello,</h1>
         <h2 className="text-5xl text-tertiary">Good to see you today!</h2>

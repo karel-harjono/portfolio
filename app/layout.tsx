@@ -18,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex min-h-screen p-0 m-0 overflow-y-scroll scrollbar bg-primary">
+        <div className="flex min-h-screen max-w-screen box-border p-0 m-0 scrollbar bg-primary">
           <Navbar />
-          <main className="flex flex-col flex-1 items-center justify-start p-24 text-primary bg-secondary rounded-lg m-3">
-            {children}
+          <main className="flex flex-col flex-1 justify-start lg:ml-64 items-center p-2">
+            <div className="flex text-primary bg-secondary rounded-lg w-full h-full p-6 lg:p-12">
+              {children}
+            </div>
           </main>
         </div>
       </body>
