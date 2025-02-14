@@ -444,7 +444,7 @@ export default function LetterPage() {
   const [showDialog, setShowDialog] = useState(false);
   const [decodedRecipient, setDecodedRecipient] = useState("");
 
-  const ALLOWED_RECIPIENT = ["Bess 天意 🦦", "Kevin Wang"];
+  const ALLOWED_RECIPIENT = useMemo(() => ["Bess 天意 🦦", "Kevin Wang", "Ethan Sidharta"], []);
 
   const params = useParams();
   const router = useRouter();
@@ -452,15 +452,13 @@ export default function LetterPage() {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const encodedRecipient = searchParams.get("p");
-    console.log("encodedRecipient", encodedRecipient);
     if (encodedRecipient) {
       try {
-        const decodedRecipient = decodeURIComponent(atob(encodedRecipient));
+        const decodedRecipient = decodeURIComponent(atob(encodedRecipient)).trim();
         if (!ALLOWED_RECIPIENT.includes(decodedRecipient)) {
           router.push("/");
           return;
         }
-        console.log("decodedRecipient", decodedRecipient);
         setDecodedRecipient(decodedRecipient);
       } catch (e) {
         // Invalid base64 or URI encoding
@@ -516,6 +514,23 @@ export default function LetterPage() {
             face.
           </p>
           <p>Thank you for being my friend. Love you brother 💖</p>
+        </>
+      );
+    } else if (decodedRecipient === "Ethan Sidharta") {
+      return (
+        <>
+          <p>
+            Happy Valentine Ethan. I&apos;m so glad to have you. You&apos;re the blessing in
+            disguise from my Red Flag Arc 🚩
+          </p>
+          <p>
+            You are such an open-minded person, and I admire you for that. I&apos;m excited to see
+            where you go in life, and I&apos;m genuinely rooting for you.
+          </p>
+          <p>
+            Thanks again for all the support you have given me. I really do appreciate it. I&apos;m
+            looking forward to see where this friendship will go. See you in Toronto!
+          </p>
         </>
       );
     }
