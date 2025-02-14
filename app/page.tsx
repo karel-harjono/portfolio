@@ -12,12 +12,18 @@ export default function Home() {
 
       <div className="flex flex-col mb-32 lg:mb-0 w-full">
         <div className="flex mb-1">
-          <h4 className="text-md text-secondary leading-normal">
-            Suggested projects
-          </h4>
+          <h4 className="text-md text-secondary leading-normal">Suggested projects</h4>
           <SparklesIcon className="h-4 w-4 ml-1 mb-6" />
         </div>
         <div className="grid text-center lg:grid-cols-3 lg:text-left">
+          <ProjectCard
+            title="DEA-Bench"
+            technologies="Python • Machine Learning • Research"
+            description="A Retrieval-Augmented Generation (RAG) evaluation metric for small to mid-scale organizations. The benchmark assesses the performance of assistant RAG systems across seven major domains and six question types allowing comparisons between commercial and open source assistant RAG systems and non-RAG LLMs."
+            projectUrl={""}
+            imgData={{ uri: "/DEA-BenchResults.png", alt: "DEA-Bench results" }}
+            isActive
+          />
           <ProjectCard
             title="Open Liberty"
             technologies="Java • App Server • Open Source Contributions"
@@ -28,16 +34,6 @@ export default function Home() {
               alt: "Open Liberty Logo",
               className: "object-scale-down",
             }}
-            isActive
-          />
-
-          <ProjectCard
-            title="DEA-Bench"
-            technologies="Python • Machine Learning • Research"
-            description="A Retrieval-Augmented Generation (RAG) evaluation metric for small to mid-scale organizations. The benchmark assesses the performance of assistant RAG systems across seven major domains and six question types allowing comparisons between commercial and open source assistant RAG systems and non-RAG LLMs."
-            projectUrl={""}
-            imgData={{ uri: "/DEA-BenchResults.png", alt: "DEA-Bench results" }}
-            isActive
           />
 
           <ProjectCard
@@ -57,9 +53,7 @@ export default function Home() {
             title="Photosensitive Content Filter"
             technologies="Python • Machine Learning • Accessibility"
             description="A content filter for photosensitive individuals that detects excessive flashes in content lacking proper labels or epilepsy warnings, ensuring compliance with the Web Content Accessibility Guidelines (WCAG) 2.0 standards."
-            projectUrl={
-              "https://github.com/karel-harjono/photosensitive-content-filter"
-            }
+            projectUrl={"https://github.com/karel-harjono/photosensitive-content-filter"}
             imgData={{
               uri: "/images/photosensitive-content-filter/flashesByFrames.png",
               alt: "Photosensitive Content Filter flash analysis plot",
