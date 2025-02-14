@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styled, { keyframes, css } from "styled-components";
 
@@ -295,15 +295,17 @@ const Button = styled.button`
 const DialogBox = styled.div<{ $isVisible: boolean }>`
   color: #000;
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 80%;
   max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
   opacity: ${(props) => (props.$isVisible ? 1 : 0)};
   visibility: ${(props) => (props.$isVisible ? "visible" : "hidden")};
   transition: all 0.5s ease-in-out;
@@ -312,7 +314,6 @@ const DialogBox = styled.div<{ $isVisible: boolean }>`
 
 const DialogHeader = styled.div`
   text-align: start;
-  margin: -2rem -2rem 1.5rem -2rem;
   padding: 1.5rem;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -346,7 +347,6 @@ const DialogHeader = styled.div`
 
 const DialogFooter = styled.div`
   text-align: end;
-  margin: 1.5rem -2rem -2rem -2rem;
   padding: 1.5rem;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -379,16 +379,33 @@ const DialogFooter = styled.div`
 
 const DialogContent = styled.div`
   position: relative;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
+  overflow-y: scroll;
+  margin: 1rem 0;
+  scrollbar-width: thin; /* Firefox */
+  -ms-overflow-style: thin; /* IE and Edge */
+
+  &::-webkit-scrollbar {
+    width: 6px; /* Chrome, Safari and Opera */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 77, 109, 0.2);
+    border-radius: 3px;
+  }
 
   &:before,
   &:after {
     content: '"';
-    position: absolute;
+    position: sticky;
     font-family: "Playfair Display", serif;
     font-size: 4rem;
     color: rgba(255, 77, 109, 0.1);
-    line-height: 1;
+    line-height: 0.1;
   }
 
   &:before {
@@ -397,8 +414,8 @@ const DialogContent = styled.div`
   }
 
   &:after {
-    bottom: 80px;
-    right: 10px;
+    bottom: 50px;
+    left: 95%;
     transform: rotate(180deg);
   }
 
@@ -425,9 +442,9 @@ export default function LetterPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+  const [decodedRecipient, setDecodedRecipient] = useState("");
 
-  const ALLOWED_RECIPIENT = "Bess 天意 🦦";
-  const ENCODED_ALLOWED_RECIPIENT = btoa(encodeURIComponent(ALLOWED_RECIPIENT));
+  const ALLOWED_RECIPIENT = ["Bess 天意 🦦", "Kevin Wang"];
 
   const params = useParams();
   const router = useRouter();
@@ -435,19 +452,20 @@ export default function LetterPage() {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const encodedRecipient = searchParams.get("p");
-
+    console.log("encodedRecipient", encodedRecipient);
     if (encodedRecipient) {
       try {
         const decodedRecipient = decodeURIComponent(atob(encodedRecipient));
-        if (decodedRecipient === ALLOWED_RECIPIENT) {
+        if (!ALLOWED_RECIPIENT.includes(decodedRecipient)) {
+          router.push("/");
           return;
         }
+        console.log("decodedRecipient", decodedRecipient);
+        setDecodedRecipient(decodedRecipient);
       } catch (e) {
         // Invalid base64 or URI encoding
       }
     }
-
-    router.push("/");
   }, [router, ALLOWED_RECIPIENT]);
 
   const handleEnvelopeClick = () => {
@@ -459,6 +477,49 @@ export default function LetterPage() {
       }, 1500); // Show dialog after letter moves to corner
     }
   };
+
+  const dialogContent = useMemo(() => {
+    if (decodedRecipient === "Bess 天意 🦦") {
+      return (
+        <>
+          <p>
+            I want to tell you how much I am grateful for you. I admire your view on life and I
+            think you are such an amazing person. I am lucky to have you in my life.
+          </p>
+          <p>
+            You always know how to lift me up, I&apos;m talking about the food(and your company
+            ofc), and you remind me that I&apos;m not in this alone.
+          </p>
+          <p>Thank you for being my valentine {decodedRecipient.split(" ")[0]}. I love you 💖</p>
+          <p
+            style={{
+              paddingTop: "32px",
+              marginBottom: "0",
+              textAlign: "right",
+              fontStyle: "italic",
+              fontSize: ".8rem",
+            }}
+          >
+            p.s. I&apos;m really excited for the Siu Yuk tonight, I hope you are too!
+          </p>
+        </>
+      );
+    } else if (decodedRecipient === "Kevin Wang") {
+      return (
+        <>
+          <p>
+            Happy Valentine Mr. Wang. I hope you have a great day! I enjoy our friendship and I
+            really do appreciate the marbles we both put into the jars.
+          </p>
+          <p>
+            You should visit me at Picnic later at 2-4pm. I&apos;ll be there with a big smile on my
+            face.
+          </p>
+          <p>Thank you for being my friend. Love you brother 💖</p>
+        </>
+      );
+    }
+  }, [decodedRecipient]);
 
   return (
     <PageContainer>
@@ -490,29 +551,10 @@ export default function LetterPage() {
 
       <DialogBox $isVisible={showDialog}>
         <DialogHeader>
-          <h2>Hi Bess 天意 🦦</h2>
+          <h2>Hi {decodedRecipient}</h2>
         </DialogHeader>
         <DialogContent>
-          <p>
-            I want to tell you how much I am grateful for you. I admire your view on life and I
-            think you are such an amazing person. I am lucky to have you in my life.
-          </p>
-          <p>
-            You always know how to lift me up, I&apos;m talking about the food(and your company
-            ofc), and you remind me that I&apos;m not in this alone.
-          </p>
-          <p>Thank you for being my valentine Bess. I love you 💖</p>
-          <p
-            style={{
-              paddingTop: "32px",
-              marginBottom: "0",
-              textAlign: "right",
-              fontStyle: "italic",
-              fontSize: ".8rem",
-            }}
-          >
-            p.s. I&apos;m really excited for the Siu Yuk tonight, I hope you are too!
-          </p>
+          {dialogContent}
 
           <p
             style={{
