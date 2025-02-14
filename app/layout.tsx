@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./_components/Navbar";
+import StyledComponentsRegistry from "./registry";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex flex-col flex-1 justify-start lg:ml-64 items-center p-2">
             <div className="flex text-primary bg-secondary rounded-lg w-full h-full p-6 lg:p-12">
-              {children}
+              <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
             </div>
           </main>
         </div>

@@ -69,9 +69,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         )}
         {!!dateCompleted && (
-          <div className="self-center justify-center text-secondary text-sm">
-            {dateCompleted}
-          </div>
+          <div className="self-center justify-center text-secondary text-sm">{dateCompleted}</div>
         )}
       </div>
     </a>

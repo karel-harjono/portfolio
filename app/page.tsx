@@ -1,4 +1,3 @@
-import FixedTextInput from "./_components/FixedTextInput";
 import ProjectCard from "./_components/ProjectCard";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 

@@ -1,12 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import {
-  HomeIcon,
-  UserIcon,
-  BriefcaseIcon,
-  EnvelopeIcon,
-} from "@heroicons/react/24/solid";
+import { HomeIcon, UserIcon, BriefcaseIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import LinkedInIcon from "./_icons/LinkedInIcon";
 import GitHubIcon from "./_icons/GitHubIcon";
 import { usePathname } from "next/navigation";
@@ -26,9 +21,7 @@ const Navbar = () => {
   return (
     <div className="hidden fixed lg:block w-60 p-2 bg-transparent text-primary rounded-3xl text-sm">
       <Link href={"/"}>
-        <div className={`${qwitcherGryphen.className} p-4 mb-1 text-4xl`}>
-          Karel Harjono
-        </div>
+        <div className={`${qwitcherGryphen.className} p-4 mb-1 text-4xl`}>Karel Harjono</div>
       </Link>
       <ul>
         <li>
@@ -64,9 +57,7 @@ const Navbar = () => {
           </div>
         </li>
       </ul>
-      <footer className="text-center text-xs text-secondary mt-2">
-        © 2024 Karel Harjono
-      </footer>
+      <footer className="text-center text-xs text-secondary mt-2">© 2025 Karel Harjono</footer>
     </div>
   );
 };
