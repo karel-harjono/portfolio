@@ -4,24 +4,11 @@ import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styled, { keyframes, css } from "styled-components";
-
-const slideUp = keyframes`
-  0% {
-    top: 0;
-  }
-  100% {
-    top: -600px;
-  }
-`;
-
-const sideSway = keyframes`
-  0% {
-    margin-left: 0px;
-  }
-  100% {
-    margin-left: 50px;
-  }
-`;
+import {
+  FloatingHearts as Hearts,
+  FloatingHeart as Heart,
+  FloatingHearts,
+} from "@/app/_components/Hearts";
 
 const moveToCorner = keyframes`
   0% {
@@ -174,91 +161,6 @@ const Words = styled.div<{ line: number }>`
         return "0";
     }
   }};
-`;
-
-const Hearts = styled.div<{ $isOpen: boolean }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  opacity: ${(props) => (props.$isOpen ? 1 : 0)};
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-`;
-
-const Heart = styled.div<{ position: number }>`
-  position: absolute;
-  bottom: 50%;
-  left: ${(props) => {
-    switch (props.position) {
-      case 1:
-        return "20%";
-      case 2:
-        return "55%";
-      case 3:
-        return "10%";
-      default:
-        return "0";
-    }
-  }};
-  width: 30px;
-  height: 30px;
-  transform: scale(
-    ${(props) => {
-      switch (props.position) {
-        case 1:
-          return "0.6";
-        case 2:
-          return "1";
-        case 3:
-          return "0.8";
-        default:
-          return "1";
-      }
-    }}
-  );
-  ${(props) => {
-    switch (props.position) {
-      case 1:
-        return css`
-          animation: ${slideUp} 4s linear infinite, ${sideSway} 2s ease-in-out infinite alternate;
-        `;
-      case 2:
-        return css`
-          animation: ${slideUp} 5s linear infinite, ${sideSway} 4s ease-in-out infinite alternate;
-        `;
-      case 3:
-        return css`
-          animation: ${slideUp} 7s linear infinite, ${sideSway} 2s ease-in-out infinite alternate;
-        `;
-      default:
-        return "";
-    }
-  }}
-  animation-fill-mode: forwards;
-  animation-delay: 0.7s;
-
-  &:before,
-  &:after {
-    position: absolute;
-    content: "";
-    left: 15px;
-    top: 0;
-    width: 15px;
-    height: 25px;
-    background: #ff1744;
-    border-radius: 15px 15px 0 0;
-    transform: rotate(-45deg);
-    transform-origin: 0 100%;
-  }
-
-  &:after {
-    left: 0;
-    transform: rotate(45deg);
-    transform-origin: 100% 100%;
-  }
 `;
 
 const ButtonContainer = styled.div`
@@ -556,11 +458,15 @@ export default function LetterPage() {
             <Words line={3} />
             <Words line={4} />
           </Letter>
-          <Hearts $isOpen={isOpen}>
-            <Heart position={1} />
-            <Heart position={2} />
-            <Heart position={3} />
-          </Hearts>
+          <FloatingHearts
+            isOpen={isOpen}
+            $zIndex={3}
+            hearts={[
+              { $color: "#ff69b4", $size: "40px" }, // First heart
+              { $color: "#ff1744", $size: "50px" }, // Second heart
+              { $color: "#ff4081", $size: "45px" }, // Third heart
+            ]}
+          />
         </Envelope>
       </EnvelopeWrapper>
 

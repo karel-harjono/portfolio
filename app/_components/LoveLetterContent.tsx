@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Playfair_Display } from "next/font/google";
 import { getDriveImageUrl } from "@/lib/DriveUtils";
+import { FloatingHearts, FloatingHeart } from "./Hearts";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -96,6 +97,17 @@ export default function LoveLetterContent({ text, media, isVideo }: LoveLetterCo
                   />
                 </div>
               )}
+              <FloatingHearts
+                $top="auto"
+                $bottom="10px"
+                isOpen={true}
+                $zIndex={10}
+                hearts={[
+                  { $color: "#ff69b4", $size: "30px" }, // First heart
+                  { $color: "#ff1744", $size: "40px" }, // Second heart
+                  { $color: "#ff4081", $size: "35px" }, // Third heart
+                ]}
+              />
             </motion.div>
           </motion.div>
         </motion.div>

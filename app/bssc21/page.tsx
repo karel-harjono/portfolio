@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import HashUtils from "@/lib/HashUtils";
 import LoveLetterContent from "@/app/_components/LoveLetterContent";
+import { FloatingHearts } from "@/app/_components/Hearts";
 
 export const metadata: Metadata = {
   title: "Love Letter",
