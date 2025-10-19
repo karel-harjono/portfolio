@@ -1,5 +1,6 @@
 import ProjectCard from "./_components/ProjectCard";
 import { SparklesIcon } from "@heroicons/react/24/solid";
+import HashUtils from "@/lib/HashUtils";
 
 export default function Home() {
   return (
@@ -16,14 +17,6 @@ export default function Home() {
         </div>
         <div className="grid text-center lg:grid-cols-3 lg:text-left">
           <ProjectCard
-            title="DEA-Bench"
-            technologies="Python • Machine Learning • Research"
-            description="A Retrieval-Augmented Generation (RAG) evaluation metric for small to mid-scale organizations. The benchmark assesses the performance of assistant RAG systems across seven major domains and six question types allowing comparisons between commercial and open source assistant RAG systems and non-RAG LLMs."
-            projectUrl={""}
-            imgData={{ uri: "/DEA-BenchResults.png", alt: "DEA-Bench results" }}
-            isActive
-          />
-          <ProjectCard
             title="Open Liberty"
             technologies="Java • App Server • Open Source Contributions"
             description="A lightweight open framework for building fast and efficient cloud-native Java microservices. Open Liberty starts up fast, with a low memory footprint and live reload for quick iteration. Adding and removing features from the latest versions of MicroProfile and Jakarta EE. And with zero migration, you focus on what's important, not the APIs changing under you."
@@ -33,6 +26,15 @@ export default function Home() {
               alt: "Open Liberty Logo",
               className: "object-scale-down",
             }}
+            isActive
+          />
+
+          <ProjectCard
+            title="DEA-Bench"
+            technologies="Python • Machine Learning • Research"
+            description="A Retrieval-Augmented Generation (RAG) evaluation metric for small to mid-scale organizations. The benchmark assesses the performance of assistant RAG systems across seven major domains and six question types allowing comparisons between commercial and open source assistant RAG systems and non-RAG LLMs."
+            projectUrl={"https://aclanthology.org/2025.naacl-industry.53/"}
+            imgData={{ uri: "/images/projects/DEA-BenchResults.png", alt: "DEA-Bench results" }}
           />
 
           <ProjectCard
@@ -41,7 +43,7 @@ export default function Home() {
             description="A CTRL-F search algorithm equipped with semantic understanding of words and voice interface capabilities. This approach combines semantic understanding with the conversational abilities of virtual assistants (VAs), enabling more precise and relevant information retrieval."
             projectUrl={"https://github.com/karel-harjono/FindAssist"}
             imgData={{
-              uri: "/findAssistBarChart.png",
+              uri: "/images/projects/findAssistBarChart.png",
               alt: "Results of FindAssist decreasing average words search time by a significant percentage.",
               className: "object-scale-down",
             }}
