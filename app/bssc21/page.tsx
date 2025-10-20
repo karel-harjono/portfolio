@@ -18,7 +18,7 @@ export const viewport = {
 
 type Content = {
   text: string | JSX.Element;
-  media?: string;
+  media?: string | (string | { url: string; aspectRatio: string })[];
   isVideo?: boolean;
   audioSrc?: string;
 };
@@ -46,14 +46,100 @@ const contentMap: Record<string, Content> = {
   },
   [HashUtils.hashId(2)]: {
     text: "Blub blub... 🐠💖, I realized I wasn't as weak as I thought. Look!! Even in the photo, I don't look like I was struggling at all! I'm so proud of myself.",
-    // text: "My dearest, every moment with you feels like a beautiful dream I never want to wake up from. You make my world brighter just by being in it.",
-    // media: "https://drive.google.com/file/d/1OXvdbrYfYyi4O7YhTM-8j6GARX5ZoWnR/view?usp=sharing", // This is just an example YouTube video ID - replace with your actual video ID
     isVideo: false,
     media: [
       `/images/bssc21/2/page2_1.JPG`,
       `/images/bssc21/2/page2_2.JPG`,
       `/images/bssc21/2/page2_3.JPG`,
       `/images/bssc21/2/page2_4.JPG`,
+      `/images/bssc21/2/page2_5.JPG`,
+    ],
+  },
+  [HashUtils.hashId(3)]: {
+    text: "Bae, I srsly don't get it.. How did I not recognize this girl before? She looks so.. pretty to me now. I pray now writing this, that I can see her this gorgeous forever. Amen~",
+    isVideo: false,
+    media: [
+      `/images/bssc21/3/page3_1.JPG`,
+      `/images/bssc21/3/page3_2.JPG`,
+      { url: `/images/bssc21/3/page3_3.JPG`, aspectRatio: "aspect-[4/3]" },
+      { url: `/images/bssc21/3/page3_4.JPG`, aspectRatio: "aspect-[3/4]" },
+    ],
+  },
+  [HashUtils.hashId(4)]: {
+    text: "You are a strong strong person. Your smiles looks so genuine and beautiful. I look at you as my inspiration. You shown me how to find joy in the little things. I hope I can be one of your little joys too. 💖",
+    isVideo: false,
+    media: [
+      { url: `/images/bssc21/4/page4_1.JPG`, aspectRatio: "aspect-[3/4]" },
+      { url: `/images/bssc21/4/page4_2.JPG`, aspectRatio: "aspect-[3/4]" },
+      { url: `/images/bssc21/4/page4_3.JPG`, aspectRatio: "aspect-[3/4]" },
+      { url: `/images/bssc21/4/page4_4.JPG`, aspectRatio: "aspect-[3/4]" },
+      { url: `/images/bssc21/4/page4_5.JPG`, aspectRatio: "aspect-[3/4]" },
+    ],
+  },
+  [HashUtils.hashId(5)]: {
+    text: "Blub blub... 🐠💖, I realized I wasn't as weak as I thought. Look!! Even in the photo, I don't look like I was struggling at all! I'm so proud of myself.",
+    isVideo: false,
+    media: [
+      `/images/bssc21/2/page2_1.JPG`,
+      `/images/bssc21/2/page2_2.JPG`,
+      `/images/bssc21/2/page2_3.JPG`,
+      `/images/bssc21/2/page2_4.JPG`,
+      `/images/bssc21/2/page2_5.JPG`,
+    ],
+  },
+  [HashUtils.hashId(6)]: {
+    text: "Blub blub... 🐠💖, I realized I wasn't as weak as I thought. Look!! Even in the photo, I don't look like I was struggling at all! I'm so proud of myself.",
+    isVideo: false,
+    media: [
+      `/images/bssc21/2/page2_1.JPG`,
+      `/images/bssc21/2/page2_2.JPG`,
+      `/images/bssc21/2/page2_3.JPG`,
+      `/images/bssc21/2/page2_4.JPG`,
+      `/images/bssc21/2/page2_5.JPG`,
+    ],
+  },
+  [HashUtils.hashId(7)]: {
+    text: "Blub blub... 🐠💖, I realized I wasn't as weak as I thought. Look!! Even in the photo, I don't look like I was struggling at all! I'm so proud of myself.",
+    isVideo: false,
+    media: [
+      `/images/bssc21/2/page2_1.JPG`,
+      `/images/bssc21/2/page2_2.JPG`,
+      `/images/bssc21/2/page2_3.JPG`,
+      `/images/bssc21/2/page2_4.JPG`,
+      `/images/bssc21/2/page2_5.JPG`,
+    ],
+  },
+  [HashUtils.hashId(8)]: {
+    text: "Blub blub... 🐠💖, I realized I wasn't as weak as I thought. Look!! Even in the photo, I don't look like I was struggling at all! I'm so proud of myself.",
+    isVideo: false,
+    media: [
+      `/images/bssc21/2/page2_1.JPG`,
+      `/images/bssc21/2/page2_2.JPG`,
+      `/images/bssc21/2/page2_3.JPG`,
+      `/images/bssc21/2/page2_4.JPG`,
+      `/images/bssc21/2/page2_5.JPG`,
+    ],
+  },
+  [HashUtils.hashId(9)]: {
+    text: "Blub blub... 🐠💖, I realized I wasn't as weak as I thought. Look!! Even in the photo, I don't look like I was struggling at all! I'm so proud of myself.",
+    isVideo: false,
+    media: [
+      `/images/bssc21/2/page2_1.JPG`,
+      `/images/bssc21/2/page2_2.JPG`,
+      `/images/bssc21/2/page2_3.JPG`,
+      `/images/bssc21/2/page2_4.JPG`,
+      `/images/bssc21/2/page2_5.JPG`,
+    ],
+  },
+  [HashUtils.hashId(10)]: {
+    text: "Blub blub... 🐠💖, I realized I wasn't as weak as I thought. Look!! Even in the photo, I don't look like I was struggling at all! I'm so proud of myself.",
+    isVideo: false,
+    media: [
+      `/images/bssc21/2/page2_1.JPG`,
+      `/images/bssc21/2/page2_2.JPG`,
+      `/images/bssc21/2/page2_3.JPG`,
+      `/images/bssc21/2/page2_4.JPG`,
+      `/images/bssc21/2/page2_5.JPG`,
     ],
   },
   // Add more entries as needed
@@ -71,6 +157,10 @@ export default function Bssc21Page({
   }
 
   const content = contentMap[id];
+
+  for (let i = 1; i <= 30; i++) {
+    console.log(i.toString() + " " + HashUtils.hashId(i));
+  }
 
   return (
     <div className="absolute inset-0 min-h-screen bg-gradient-to-b from-red-300 to-rose-500">

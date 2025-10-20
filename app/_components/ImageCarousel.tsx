@@ -4,16 +4,82 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, PanInfo } from "framer-motion";
 
-interface ImageCarouselProps {
-  images: string[];
-  aspectRatio?: "square" | "video" | "auto";
+interface MediaItem {
+  url: string;
+  type: "image" | "video";
+  aspectRatio?: string;
 }
 
-export default function ImageCarousel({ images, aspectRatio = "square" }: ImageCarouselProps) {
+interface ImageCarouselProps {
+  images?: string[];
+  items?: MediaItem[];
+  aspectRatio?: "square" | "video" | "auto";
+  aspectRatioOverride?: string;
+  isVideo?: boolean;
+}
+
+function YouTubeEmbed({ url }: { url: string }) {
+  // Extract video ID from YouTube URL
+  const getYouTubeID = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
+  };
+
+  const videoId = getYouTubeID(url);
+  if (!videoId) return null;
+
+  return (
+    <div className="relative w-full h-full">
+      <iframe
+        src={`https://www.youtube.com/embed/${videoId}`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="absolute top-0 left-0 w-full h-full rounded-xl"
+      />
+    </div>
+  );
+}
+
+function MediaSlide({ item }: { item: MediaItem }) {
+  if (item.type === "video") {
+    return <YouTubeEmbed url={item.url} />;
+  }
+  return (
+    <Image
+      src={item.url}
+      alt="Carousel slide"
+      className="rounded-xl object-cover shadow-md"
+      fill
+      priority
+      unoptimized
+    />
+  );
+}
+
+export default function ImageCarousel({
+  images,
+  items,
+  aspectRatio = "square",
+  aspectRatioOverride,
+  isVideo = false,
+}: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [showControls, setShowControls] = useState(false);
   const [controlsTimeout, setControlsTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  // Convert old format to new format if needed
+  const mediaItems: MediaItem[] =
+    items ||
+    images?.map(
+      (url): MediaItem => ({
+        url,
+        type:
+          isVideo || url.includes("youtube.com") || url.includes("youtu.be") ? "video" : "image",
+      })
+    ) ||
+    [];
 
   const resetControlsTimer = useCallback(() => {
     if (controlsTimeout) {
@@ -65,17 +131,11 @@ export default function ImageCarousel({ images, aspectRatio = "square" }: ImageC
     setDirection(newDirection);
     setCurrentIndex((prevIndex) => {
       const nextIndex = prevIndex + newDirection;
-      if (nextIndex < 0) return images.length - 1;
-      if (nextIndex >= images.length) return 0;
+      if (nextIndex < 0) return mediaItems.length - 1;
+      if (nextIndex >= mediaItems.length) return 0;
       return nextIndex;
     });
   };
-
-  const aspectRatioClass = {
-    square: "aspect-square",
-    video: "aspect-video",
-    auto: "aspect-auto",
-  }[aspectRatio];
 
   return (
     <div
@@ -84,7 +144,17 @@ export default function ImageCarousel({ images, aspectRatio = "square" }: ImageC
       onTouchStart={handleInteraction}
       onClick={handleInteraction}
     >
-      <div className={`relative w-full ${aspectRatioClass}`}>
+      <div
+        className={`relative w-full ${
+          mediaItems[currentIndex]?.aspectRatio ||
+          aspectRatioOverride ||
+          {
+            square: "aspect-square",
+            video: "aspect-video",
+            auto: "aspect-auto",
+          }[aspectRatio]
+        }`}
+      >
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
@@ -111,21 +181,14 @@ export default function ImageCarousel({ images, aspectRatio = "square" }: ImageC
             }}
             className="absolute w-full h-full"
           >
-            <Image
-              src={images[currentIndex]}
-              alt={`Slide ${currentIndex + 1}`}
-              className="rounded-xl object-cover shadow-md"
-              fill
-              priority
-              unoptimized
-            />
+            <MediaSlide item={mediaItems[currentIndex]} />
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* Navigation dots */}
       <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
-        {images.map((_, index) => (
+        {mediaItems.map((_, index) => (
           <button
             key={index}
             onClick={() => {
@@ -140,7 +203,7 @@ export default function ImageCarousel({ images, aspectRatio = "square" }: ImageC
       </div>
 
       {/* Arrow buttons */}
-      {images.length > 1 && (
+      {mediaItems.length > 1 && (
         <AnimatePresence>
           {showControls && (
             <>
@@ -149,7 +212,7 @@ export default function ImageCarousel({ images, aspectRatio = "square" }: ImageC
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/30 hover:bg-white/50 transition-colors flex items-center justify-center z-10"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/35 hover:bg-black/70 transition-colors flex items-center justify-center z-10"
                 onClick={() => {
                   paginate(-1);
                   handleInteraction();
@@ -162,7 +225,7 @@ export default function ImageCarousel({ images, aspectRatio = "square" }: ImageC
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/30 hover:bg-white/50 transition-colors flex items-center justify-center z-10"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/35 hover:bg-black/70 transition-colors flex items-center justify-center z-10"
                 onClick={() => {
                   paginate(1);
                   handleInteraction();

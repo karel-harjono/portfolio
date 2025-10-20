@@ -13,9 +13,14 @@ const playfair = Playfair_Display({
   weight: ["400", "700"],
 });
 
+type MediaItem = {
+  url: string;
+  aspectRatio?: string;
+};
+
 type LoveLetterContentProps = {
   text: string | JSX.Element;
-  media?: string | string[];
+  media?: string | MediaItem | (string | MediaItem)[];
   isVideo?: boolean;
   audioSrc?: string;
 };
@@ -95,11 +100,18 @@ export default function LoveLetterContent({ text, media, isVideo }: LoveLetterCo
                   </div>
                 ) : media ? (
                   Array.isArray(media) ? (
-                    <ImageCarousel images={media} aspectRatio="square" />
+                    <ImageCarousel
+                      items={media.map((item) => {
+                        if (typeof item === "string") {
+                          return { url: item, type: "image" };
+                        }
+                        return { ...item, type: "image" };
+                      })}
+                    />
                   ) : (
                     <div className="relative w-full h-full">
                       <Image
-                        src={media}
+                        src={typeof media === "string" ? media : media.url}
                         alt="Love letter illustration"
                         className="rounded-xl object-cover shadow-md"
                         fill
