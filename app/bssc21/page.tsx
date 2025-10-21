@@ -1,3 +1,4 @@
+import React from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import HashUtils from "@/lib/HashUtils";
@@ -31,14 +32,16 @@ const contentMap: Record<string, Content> = {
           slides={[
             "Dear Bess,",
             "Happy 21st Birthday 🎉🎂.",
-            "I wish you a day that's quiet but full of warmth. I pray for the coming year filled with exciting new adventures.",
+            "I wish you a day that&apos;s quiet but full of warmth. I pray for the coming year filled with exciting new adventures.",
             "You are the greatest gift in my life. So today, I want to give to you something from the bottom of my heart.",
-            <>
-              Of the countless times I've adorned you with my words, none have ever truly captured
-              the depth of my feelings for you. But today, I hope this series of heartfelt photos
-              (and surprises) can show you just how much you mean to me.
-            </>,
-            <span className="italic">From Karel</span>,
+            <React.Fragment key="note">
+              Of the countless times I&apos;ve adorned you with my words, none have ever truly
+              captured the depth of my feelings for you. But today, I hope this series of heartfelt
+              photos (and surprises) can show you just how much you mean to me.
+            </React.Fragment>,
+            <span key="from" className="italic">
+              From Karel
+            </span>,
           ]}
         />
       </>
