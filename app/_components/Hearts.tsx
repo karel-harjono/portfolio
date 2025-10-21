@@ -32,7 +32,7 @@ interface FloatingHeartsStyleProps {
 
 interface FloatingHeartsProps extends Omit<FloatingHeartsStyleProps, "$isOpen"> {
   isOpen: boolean;
-  hearts?: Array<Omit<FloatingHeartProps, "position">>;
+  hearts?: Array<Omit<FloatingHeartProps, "$position">>;
 }
 
 const FloatingHeartsContainer = styled.div<FloatingHeartsStyleProps>`
@@ -48,7 +48,7 @@ const FloatingHeartsContainer = styled.div<FloatingHeartsStyleProps>`
 `;
 
 interface FloatingHeartProps {
-  position: number;
+  $position: number;
   $size?: string;
   $color?: string;
   $scale?: number;
@@ -65,7 +65,7 @@ export const FloatingHeart = styled.div<FloatingHeartProps>`
   bottom: ${(props) => props.$bottom ?? "50%"};
   left: ${(props) => {
     if (props.$left) return props.$left;
-    switch (props.position) {
+    switch (props.$position) {
       case 1:
         return "20%";
       case 2:
@@ -81,7 +81,7 @@ export const FloatingHeart = styled.div<FloatingHeartProps>`
   transform: scale(
     ${(props) => {
       if (props.$scale) return props.$scale;
-      switch (props.position) {
+      switch (props.$position) {
         case 1:
           return "0.6";
         case 2:
@@ -94,7 +94,7 @@ export const FloatingHeart = styled.div<FloatingHeartProps>`
     }}
   );
   ${(props) => {
-    switch (props.position) {
+    switch (props.$position) {
       case 1:
         return css`
           animation: ${slideUp} 4s linear infinite, ${sideSway} 2s ease-in-out infinite alternate;
@@ -150,7 +150,7 @@ export const FloatingHearts: React.FC<FloatingHeartsProps> = ({
   return (
     <FloatingHeartsContainer $isOpen={isOpen} {...containerProps}>
       {hearts.map((heartProps, index) => (
-        <FloatingHeart key={index} position={index + 1} {...heartProps} />
+        <FloatingHeart key={index} $position={index + 1} {...heartProps} />
       ))}
     </FloatingHeartsContainer>
   );

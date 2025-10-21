@@ -103,9 +103,13 @@ export default function LoveLetterContent({ text, media, isVideo }: LoveLetterCo
                     <ImageCarousel
                       items={media.map((item) => {
                         if (typeof item === "string") {
-                          return { url: item, type: "image" };
+                          const isYouTube =
+                            item.includes("youtube.com") || item.includes("youtu.be");
+                          return { url: item, type: isYouTube ? "video" : "image" };
                         }
-                        return { ...item, type: "image" };
+                        const isYouTube =
+                          item.url.includes("youtube.com") || item.url.includes("youtu.be");
+                        return { ...item, type: isYouTube ? "video" : "image" };
                       })}
                     />
                   ) : (
