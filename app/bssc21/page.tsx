@@ -10,6 +10,13 @@ export const metadata: Metadata = {
   title: "My gift to you",
 };
 
+// Generate static params for all possible hash IDs (1-10)
+export function generateStaticParams() {
+  return Array.from({ length: 10 }, (_, i) => ({
+    id: HashUtils.hashId(i + 1),
+  }));
+}
+
 export const viewport = {
   width: "device-width",
   initialScale: 1,
