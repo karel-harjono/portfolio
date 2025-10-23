@@ -104,11 +104,15 @@ export default function LoveLetterContent({ text, media, isVideo }: LoveLetterCo
                       items={media.map((item) => {
                         if (typeof item === "string") {
                           const isYouTube =
-                            item.includes("youtube.com") || item.includes("youtu.be");
+                            item.includes("youtube.com") ||
+                            item.includes("youtu.be") ||
+                            item.includes("/shorts/");
                           return { url: item, type: isYouTube ? "video" : "image" };
                         }
                         const isYouTube =
-                          item.url.includes("youtube.com") || item.url.includes("youtu.be");
+                          item.url.includes("youtube.com") ||
+                          item.url.includes("youtu.be") ||
+                          item.url.includes("/shorts/");
                         return { ...item, type: isYouTube ? "video" : "image" };
                       })}
                     />

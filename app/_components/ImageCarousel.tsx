@@ -19,8 +19,15 @@ interface ImageCarouselProps {
 }
 
 function YouTubeEmbed({ url }: { url: string }) {
-  // Extract video ID from YouTube URL
+  // Extract video ID from YouTube URL (supports regular videos, shorts, and youtu.be links)
   const getYouTubeID = (url: string) => {
+    // Check for YouTube Shorts
+    const shortsMatch = url.match(/(?:youtube\.com\/shorts\/)([^#&?/]*)/);
+    if (shortsMatch && shortsMatch[1].length === 11) {
+      return shortsMatch[1];
+    }
+
+    // Check for regular YouTube URLs
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return match && match[2].length === 11 ? match[2] : null;
