@@ -186,7 +186,7 @@ export const contentMap: Record<string, Content> = {
     ],
   },
   [HashUtils.hashId(15)]: {
-    text: "",
+    text: "Another day, another joy to see you smile 😊💖",
     isVideo: false,
     media: [
       { url: "/images/bssc21/15/page15_1.jpg", aspectRatio: "aspect-[3/4]" },
@@ -195,7 +195,7 @@ export const contentMap: Record<string, Content> = {
     ],
   },
   [HashUtils.hashId(16)]: {
-    text: "",
+    text: "Today, I felt especially grateful for you. I felt that you are such a blessing in my life.",
     isVideo: false,
     media: [
       { url: "/images/bssc21/16/page16_1.jpg", aspectRatio: "aspect-[3/4]" },
@@ -207,7 +207,7 @@ export const contentMap: Record<string, Content> = {
     ],
   },
   [HashUtils.hashId(17)]: {
-    text: "",
+    text: "Our fellowship together has given me so much joy. I cherish them very much. I hope we can have more of these desires to learn more about God together.",
     isVideo: false,
     media: [
       { url: "/images/bssc21/17/page17_1.jpg", aspectRatio: "aspect-[3/4]" },
@@ -217,58 +217,58 @@ export const contentMap: Record<string, Content> = {
     ],
   },
   [HashUtils.hashId(18)]: {
-    text: "",
+    text: "You are gorgeous..",
     isVideo: false,
     media: [
       "/images/bssc21/18/page18_1.jpg",
       "/images/bssc21/18/page18_2.jpg",
-      "/images/bssc21/18/page18_3.jpg",
-      "/images/bssc21/18/page18_4.jpg",
-      "/images/bssc21/18/page18_5.jpg",
+      // "/images/bssc21/18/page18_3.jpg",
+      // "/images/bssc21/18/page18_4.jpg",
+      // "/images/bssc21/18/page18_5.jpg",
     ],
   },
   [HashUtils.hashId(19)]: {
-    text: "",
+    text: "Can`t take my eyes off of you.. ",
     isVideo: false,
     media: [
       "/images/bssc21/19/page19_1.jpg",
       "/images/bssc21/19/page19_2.jpg",
       "/images/bssc21/19/page19_3.jpg",
-      "/images/bssc21/19/page19_4.jpg",
-      "/images/bssc21/19/page19_5.jpg",
+      // "/images/bssc21/19/page19_4.jpg",
+      // "/images/bssc21/19/page19_5.jpg",
     ],
   },
   [HashUtils.hashId(20)]: {
-    text: "",
+    text: "Rainbow will always reminds me of you. So full of colors and life :)",
     isVideo: false,
     media: [
       "/images/bssc21/20/page20_1.jpg",
-      "/images/bssc21/20/page20_2.jpg",
-      "/images/bssc21/20/page20_3.jpg",
-      "/images/bssc21/20/page20_4.jpg",
-      "/images/bssc21/20/page20_5.jpg",
+      // "/images/bssc21/20/page20_2.jpg",
+      // "/images/bssc21/20/page20_3.jpg",
+      // "/images/bssc21/20/page20_4.jpg",
+      // "/images/bssc21/20/page20_5.jpg",
     ],
   },
   [HashUtils.hashId(21)]: {
-    text: "",
+    text: "I thought I would have a hard time filling out 21 of these pages, but looking at these photos of you, I realized I have so many more reasons to love you.",
     isVideo: false,
     media: [
       "/images/bssc21/21/page21_1.jpg",
-      "/images/bssc21/21/page21_2.jpg",
-      "/images/bssc21/21/page21_3.jpg",
-      "/images/bssc21/21/page21_4.jpg",
-      "/images/bssc21/21/page21_5.jpg",
+      // "/images/bssc21/21/page21_2.jpg",
+      // "/images/bssc21/21/page21_3.jpg",
+      // "/images/bssc21/21/page21_4.jpg",
+      // "/images/bssc21/21/page21_5.jpg",
     ],
   },
   [HashUtils.hashId(22)]: {
-    text: "",
+    text: "Though this is the last, I hope it is not the end, but rather a new beginning for us. I look forward to more memories together. I love you so much, Bess. Happy Birthday!",
     isVideo: false,
     media: [
       "/images/bssc21/22/page22_1.jpg",
-      "/images/bssc21/22/page22_2.jpg",
-      "/images/bssc21/22/page22_3.jpg",
-      "/images/bssc21/22/page22_4.jpg",
-      "/images/bssc21/22/page22_5.jpg",
+      // "/images/bssc21/22/page22_2.jpg",
+      // "/images/bssc21/22/page22_3.jpg",
+      // "/images/bssc21/22/page22_4.jpg",
+      // "/images/bssc21/22/page22_5.jpg",
     ],
   },
   // Add more entries as needed
