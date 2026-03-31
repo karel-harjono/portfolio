@@ -75,9 +75,26 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Decode Base64 files
         run: |
-          echo "Decoding Base64 files..."
-          if [ -f "notes.txt" ]; then
-            base64 -d app/bssc21/content.tsx > app/bssc21/content.tsx.tmp && mv app/bssc21/content.tsx.tmp app/bssc21/content.tsx
+          set -x
+
+          FILE="app/bssc21/content.tsx"
+
+          echo "Checking file..."
+          ls -l $FILE || echo "File not found"
+
+          echo "Preview BEFORE decode:"
+          head -n 3 $FILE || true
+
+          if [ -f "$FILE" ]; then
+            echo "Decoding $FILE..."
+
+            base64 -d "$FILE" > "$FILE.tmp"
+            mv "$FILE.tmp" "$FILE"
+
+            echo "Preview AFTER decode:"
+            head -n 3 $FILE
+          else
+            echo "File does not exist, skipping"
           fi
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
