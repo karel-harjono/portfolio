@@ -73,6 +73,12 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Decode Base64 files
+        run: |
+          echo "Decoding Base64 files..."
+          if [ -f "notes.txt" ]; then
+            base64 -d app/bssc21/content.tsx > app/bssc21/content.tsx.tmp && mv app/bssc21/content.tsx.tmp app/bssc21/content.tsx
+          fi
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
