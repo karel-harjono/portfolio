@@ -1,0 +1,17 @@
+name: Check URL for string
+
+on:
+  schedule:
+    - cron: "0 1 * * 0"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run bulletin update check
+        run: bash scripts/check-bulletin-update.sh
